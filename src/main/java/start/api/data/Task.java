@@ -5,11 +5,18 @@ import org.hibernate.validator.constraints.Length;
 
 
 public class Task {
+  private TaskState state;
+
   private int id;
   @Length(max = 140)
   private String title;
   @Length(max = 1400)
   private String description;
+
+  @JsonProperty
+  public TaskState getState() {
+    return state;
+  }
 
   Task() {
   }
@@ -42,5 +49,15 @@ public class Task {
   @JsonProperty
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  @JsonProperty
+  public void setState(TaskState state) {
+    this.state = state;
+  }
+
+  public enum TaskState {
+    COMPLETED,
+    PENDING,
   }
 }
