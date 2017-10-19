@@ -7,7 +7,7 @@ import start.api.UserTaskAPI;
 public class InMemoryAPI {
   private TaskAPI taskAPI = new InMemoryTaskAPI();
   private UserAPI userAPI = new InMemoryUserAPI();
-  private UserTaskAPI userTaskAPI = new InMemoryUserTaskAPI();
+  private UserTaskAPI userTaskAPI = new InMemoryUserTaskAPI(this);
 
   public UserAPI getUserAPI() {
     return userAPI;

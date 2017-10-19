@@ -1,4 +1,4 @@
-package start.api.data;
+package start.data;
 
 public class UserTask {
   public enum Tag {

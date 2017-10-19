@@ -1,8 +1,8 @@
 package start.resources;
 
-import start.api.data.Task;
-import start.api.data.UserTask;
 import start.api.impl.InMemoryAPI;
+import start.data.Task;
+import start.data.UserTask;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

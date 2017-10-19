@@ -1,7 +1,7 @@
 package start.resources;
 
-import start.api.data.User;
 import start.api.impl.InMemoryAPI;
+import start.data.User;
 
 import javax.ws.rs.*;
 

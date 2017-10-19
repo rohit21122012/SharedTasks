@@ -1,22 +1,22 @@
 package start.api;
 
-import start.api.data.Task;
-import start.api.data.UserTask;
+import start.data.Task;
+import start.data.UserTask;
 
-import java.util.List;
+import java.util.Set;
 
 public interface UserTaskAPI {
   Task getTask(int userId, int taskId);
 
-  List<Task> getTasks(int userId);
+  Set<Task> getTasks(int userId);
 
-  List<Task> getTasksWithTags(int userId, List<UserTask.Tag> tags);
+  Set<Task> getTasksWithTags(int userId, Set<UserTask.Tag> tags);
 
-  List<Task> getTasksWithState(int userId, Task.TaskState taskState);
+  Set<Task> getTasksWithState(int userId, Task.TaskState taskState);
 
-  Task addTask(int userId, int taskId, List<UserTask.Tag> tags);
+  Task addTask(int userId, int taskId, Set<UserTask.Tag> tags);
 
-  Task updateTask(int userId, int taskId, List<UserTask.Tag> tags);
+  Set<UserTask.Tag> updateTaskTags(int userId, int taskId, Set<UserTask.Tag> tags);
 
   Task deleteTask(int userId, int taskId);
 }

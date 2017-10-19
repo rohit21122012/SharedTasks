@@ -1,7 +1,7 @@
 package start.api.impl;
 
 import start.api.UserAPI;
-import start.api.data.User;
+import start.data.User;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

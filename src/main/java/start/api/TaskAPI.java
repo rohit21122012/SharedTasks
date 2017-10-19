@@ -1,13 +1,17 @@
 package start.api;
 
-import start.api.data.Task;
+import start.data.Task;
+
+import java.util.Set;
 
 public interface TaskAPI {
   Task get(int taskId);
-
   Task add(Task task);
+  Task update(int taskId, Task task);
 
   Task delete(int taskId);
 
-  Task update(int taskId, Task task);
+  Set<Task> getBatched(Set<Integer> taskIds);
+
+  Set<Task> deleteBatched(Set<Integer> taskIds);
 }

@@ -1,11 +1,13 @@
 package start.api.impl;
 
 import start.api.TaskAPI;
-import start.api.data.Task;
+import start.data.Task;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 class InMemoryTaskAPI implements TaskAPI {
   private final Map<Integer, Task> taskLookup = new ConcurrentHashMap<>();
@@ -33,5 +35,15 @@ class InMemoryTaskAPI implements TaskAPI {
   @Override
   public Task delete(int taskId) {
     return taskLookup.remove(taskId);
+  }
+
+  @Override
+  public Set<Task> getBatched(Set<Integer> taskIds) {
+    return taskIds.stream().map(taskLookup::get).collect(Collectors.toSet());
+  }
+
+  @Override
+  public Set<Task> deleteBatched(Set<Integer> taskIds) {
+    return taskIds.stream().map(taskLookup::remove).collect(Collectors.toSet());
   }
 }

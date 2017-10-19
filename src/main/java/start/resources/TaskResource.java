@@ -1,7 +1,7 @@
 package start.resources;
 
-import start.api.data.Task;
 import start.api.impl.InMemoryAPI;
+import start.data.Task;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

@@ -1,6 +1,6 @@
 package start.api;
 
-import start.api.data.User;
+import start.data.User;
 
 public interface UserAPI {
   User get(int userId);
