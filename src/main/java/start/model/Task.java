@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.Length;
 
 public class Task {
   private TaskState state;
-
   private int id;
   @Length(max = 140)
   private String title;

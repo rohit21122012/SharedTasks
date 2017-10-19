@@ -2,8 +2,8 @@ package start.api.impl;
 
 import start.access.DAOFactory;
 import start.api.UserTaskAPI;
+import start.model.Tag;
 import start.model.Task;
-import start.model.UserTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class UserTaskAPIImpl implements UserTaskAPI {
-
   private final DAOFactory api;
-  private Map<Integer, Map<Integer, Set<UserTask.Tag>>> userTasksMap = new ConcurrentHashMap<>();
+  private Map<Integer, Map<Integer, Set<Tag>>> userTasksMap = new ConcurrentHashMap<>();
 
   public UserTaskAPIImpl(DAOFactory api) {
     this.api = api;
@@ -34,7 +33,7 @@ public class UserTaskAPIImpl implements UserTaskAPI {
   }
 
   @Override
-  public Set<Task> getTasksWithTags(int userId, Set<UserTask.Tag> tags) {
+  public Set<Task> getTasksWithTags(int userId, Set<Tag> tags) {
     return api.getTaskDAO().getBatched(userTasksMap.get(userId).entrySet().stream()
         .filter(integerSetEntry -> integerSetEntry.getValue().containsAll(tags))
         .map(Map.Entry::getKey)
@@ -49,18 +48,18 @@ public class UserTaskAPIImpl implements UserTaskAPI {
   }
 
   @Override
-  public Task addTask(int userId, int taskId, Set<UserTask.Tag> tags) {
+  public Task addTask(int userId, int taskId, Set<Tag> tags) {
     if (userTasksMap.containsKey(userId))
       userTasksMap.get(userId).put(taskId, tags);
     else
-      userTasksMap.put(userId, new HashMap<Integer, Set<UserTask.Tag>>() {{
+      userTasksMap.put(userId, new HashMap<Integer, Set<Tag>>() {{
         put(taskId, tags);
       }});
     return getTask(userId, taskId);
   }
 
   @Override
-  public Set<UserTask.Tag> updateTaskTags(int userId, int taskId, Set<UserTask.Tag> tags) {
+  public Set<Tag> updateTaskTags(int userId, int taskId, Set<Tag> tags) {
     if (userTasksMap.containsKey(userId) && userTasksMap.get(userId).containsKey(taskId)) {
       userTasksMap.get(userId).put(taskId, tags);
     }
