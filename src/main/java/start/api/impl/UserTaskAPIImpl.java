@@ -1,8 +1,9 @@
 package start.api.impl;
 
+import start.access.DAOFactory;
 import start.api.UserTaskAPI;
-import start.data.Task;
-import start.data.UserTask;
+import start.model.Task;
+import start.model.UserTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,31 +11,31 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-class InMemoryUserTaskAPI implements UserTaskAPI {
+public class UserTaskAPIImpl implements UserTaskAPI {
 
-  private final InMemoryAPI inMemoryAPI;
+  private final DAOFactory api;
   private Map<Integer, Map<Integer, Set<UserTask.Tag>>> userTasksMap = new ConcurrentHashMap<>();
 
-  InMemoryUserTaskAPI(InMemoryAPI inMemoryAPI) {
-    this.inMemoryAPI = inMemoryAPI;
+  public UserTaskAPIImpl(DAOFactory api) {
+    this.api = api;
   }
 
   @Override
   public Task getTask(int userId, int taskId) {
     if (userTasksMap.get(userId).containsKey(taskId)) {
-      return inMemoryAPI.getTaskAPI().get(taskId);
+      return api.getTaskDAO().get(taskId);
     }
     return null;
   }
 
   @Override
   public Set<Task> getTasks(int userId) {
-    return inMemoryAPI.getTaskAPI().getBatched(userTasksMap.get(userId).keySet());
+    return api.getTaskDAO().getBatched(userTasksMap.get(userId).keySet());
   }
 
   @Override
   public Set<Task> getTasksWithTags(int userId, Set<UserTask.Tag> tags) {
-    return inMemoryAPI.getTaskAPI().getBatched(userTasksMap.get(userId).entrySet().stream()
+    return api.getTaskDAO().getBatched(userTasksMap.get(userId).entrySet().stream()
         .filter(integerSetEntry -> integerSetEntry.getValue().containsAll(tags))
         .map(Map.Entry::getKey)
         .collect(Collectors.toSet()));
@@ -42,8 +43,8 @@ class InMemoryUserTaskAPI implements UserTaskAPI {
 
   @Override
   public Set<Task> getTasksWithState(int userId, Task.TaskState taskState) {
-    return inMemoryAPI.getTaskAPI().getBatched(userTasksMap.get(userId).keySet().stream()
-        .filter(integer -> inMemoryAPI.getTaskAPI().get(integer).getState().equals(taskState))
+    return api.getTaskDAO().getBatched(userTasksMap.get(userId).keySet().stream()
+        .filter(integer -> api.getTaskDAO().get(integer).getState().equals(taskState))
         .collect(Collectors.toSet()));
   }
 
@@ -69,7 +70,7 @@ class InMemoryUserTaskAPI implements UserTaskAPI {
   @Override
   public Task deleteTask(int userId, int taskId) {
     if (userTasksMap.containsKey(userId)) {
-      return userTasksMap.get(userId).remove(taskId) == null ? null : inMemoryAPI.getTaskAPI().get(taskId);
+      return userTasksMap.get(userId).remove(taskId) == null ? null : api.getTaskDAO().get(taskId);
     }
     return null;
   }

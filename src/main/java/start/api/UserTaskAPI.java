@@ -1,7 +1,7 @@
 package start.api;
 
-import start.data.Task;
-import start.data.UserTask;
+import start.model.Task;
+import start.model.UserTask;
 
 import java.util.Set;
 

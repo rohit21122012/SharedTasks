@@ -1,4 +1,4 @@
-package start.data;
+package start.model;
 
 public class UserTask {
   public enum Tag {

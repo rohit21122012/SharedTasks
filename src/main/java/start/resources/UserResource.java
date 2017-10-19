@@ -1,39 +1,39 @@
 package start.resources;
 
-import start.api.impl.InMemoryAPI;
-import start.data.User;
+import start.access.DAOFactory;
+import start.model.User;
 
 import javax.ws.rs.*;
 
 @Path("/users")
 public class UserResource {
 
-  private final InMemoryAPI inMemoryAPI;
+  private final DAOFactory DAOFactory;
 
-  public UserResource(InMemoryAPI inMemoryAPI) {
-    this.inMemoryAPI = inMemoryAPI;
+  public UserResource(DAOFactory DAOFactory) {
+    this.DAOFactory = DAOFactory;
   }
 
   @Path("/{userId}")
   @GET
   public User getUser(@PathParam("userId") int userId) {
-    return this.inMemoryAPI.getUserAPI().get(userId);
+    return this.DAOFactory.getUserDAO().get(userId);
   }
 
   @POST
   public User addUser(User user) {
-    return this.inMemoryAPI.getUserAPI().add(user);
+    return this.DAOFactory.getUserDAO().add(user);
   }
 
   @Path("/{userId}")
   @PUT
   public User updateUser(@PathParam("userId") int userId, User user) {
-    return this.inMemoryAPI.getUserAPI().update(userId, user);
+    return this.DAOFactory.getUserDAO().update(userId, user);
   }
 
   @Path("/{userId}")
   @DELETE
   public User deleteUser(@PathParam("userId") int userId) {
-    return this.inMemoryAPI.getUserAPI().delete(userId);
+    return this.DAOFactory.getUserDAO().delete(userId);
   }
 }

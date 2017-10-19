@@ -1,7 +1,7 @@
-package start.api.impl;
+package start.access.impl;
 
-import start.api.TaskAPI;
-import start.data.Task;
+import start.access.TaskDAO;
+import start.model.Task;
 
 import java.util.Map;
 import java.util.Set;
@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-class InMemoryTaskAPI implements TaskAPI {
+class InMemoryTaskDAO implements TaskDAO {
   private final Map<Integer, Task> taskLookup = new ConcurrentHashMap<>();
   private AtomicInteger intId = new AtomicInteger(0);
 

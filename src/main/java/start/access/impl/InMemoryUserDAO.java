@@ -1,13 +1,13 @@
-package start.api.impl;
+package start.access.impl;
 
-import start.api.UserAPI;
-import start.data.User;
+import start.access.UserDAO;
+import start.model.User;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-class InMemoryUserAPI implements UserAPI {
+class InMemoryUserDAO implements UserDAO {
   private final Map<Integer, User> userLookup = new ConcurrentHashMap<>();
   private AtomicInteger intId = new AtomicInteger(0);
 

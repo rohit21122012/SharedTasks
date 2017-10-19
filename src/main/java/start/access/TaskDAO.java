@@ -1,10 +1,10 @@
-package start.api;
+package start.access;
 
-import start.data.Task;
+import start.model.Task;
 
 import java.util.Set;
 
-public interface TaskAPI {
+public interface TaskDAO {
   Task get(int taskId);
   Task add(Task task);
   Task update(int taskId, Task task);

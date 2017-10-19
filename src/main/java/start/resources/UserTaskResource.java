@@ -1,8 +1,8 @@
 package start.resources;
 
-import start.api.impl.InMemoryAPI;
-import start.data.Task;
-import start.data.UserTask;
+import start.api.UserTaskAPI;
+import start.model.Task;
+import start.model.UserTask;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,10 +13,10 @@ import java.util.List;
 @Path("/Users")
 public class UserTaskResource {
 
-  private final InMemoryAPI inMemoryAPI;
+  private final UserTaskAPI userTaskAPI;
 
-  public UserTaskResource(InMemoryAPI inMemoryAPI) {
-    this.inMemoryAPI = inMemoryAPI;
+  public UserTaskResource(UserTaskAPI api) {
+    this.userTaskAPI = api;
   }
 
 
@@ -26,6 +26,6 @@ public class UserTaskResource {
                           @PathParam("taskId") int taskId,
                           @QueryParam("tags") List<UserTask.Tag> tags) {
 
-    return inMemoryAPI.getUserTaskAPI().getTask(userId, taskId);
+    return userTaskAPI.getTask(userId, taskId);
   }
 }

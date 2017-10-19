@@ -1,8 +1,8 @@
-package start.api;
+package start.access;
 
-import start.data.User;
+import start.model.User;
 
-public interface UserAPI {
+public interface UserDAO {
   User get(int userId);
 
   User add(User user);
