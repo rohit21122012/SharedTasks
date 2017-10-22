@@ -1,4 +1,4 @@
-package start.access.impl;
+package start.access.inmemory;
 
 import start.access.UserDAO;
 import start.model.User;

@@ -4,17 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class Config extends Configuration {
+class Config extends Configuration {
   @NotEmpty
-  private String name;
+  private String storeName;
 
   @JsonProperty
-  public String getName() {
-    return name;
+  String getStoreName() {
+    return storeName;
   }
 
   @JsonProperty
-  public void setName(String name) {
-    this.name = name;
+  void setStoreName(String storeName) {
+    this.storeName = storeName;
   }
 }
