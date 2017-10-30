@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.curator</groupId>
-            <artifactId>curator-x-async</artifactId>
+            <artifactId>curator-framework</artifactId>
             <version>4.0.0</version>
         </dependency>
     </dependencies>

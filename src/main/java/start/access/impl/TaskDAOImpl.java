@@ -1,17 +1,21 @@
-package start.access.inmemory;
+package start.access.impl;
 
 import start.access.TaskDAO;
 import start.model.Task;
+import start.store.Store;
 
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-class InMemoryTaskDAO implements TaskDAO {
-  private final Map<Integer, Task> taskLookup = new ConcurrentHashMap<>();
-  private AtomicInteger intId = new AtomicInteger(0);
+public class TaskDAOImpl implements TaskDAO {
+  private final AtomicInteger intId;
+  private final Store<Task> taskLookup;
+
+  public TaskDAOImpl(Store<Task> taskLookup) {
+    this.taskLookup = taskLookup;
+    this.intId = new AtomicInteger(0);
+  }
 
   @Override
   public Task get(int taskId) {

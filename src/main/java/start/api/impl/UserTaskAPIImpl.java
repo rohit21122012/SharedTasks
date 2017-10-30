@@ -1,6 +1,6 @@
 package start.api.impl;
 
-import start.access.DAOFactory;
+import start.access.DAO;
 import start.api.UserTaskAPI;
 import start.model.Tag;
 import start.model.Task;
@@ -12,29 +12,29 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class UserTaskAPIImpl implements UserTaskAPI {
-  private final DAOFactory api;
+  private final DAO dao;
   private Map<Integer, Map<Integer, Set<Tag>>> userTasksMap = new ConcurrentHashMap<>();
 
-  public UserTaskAPIImpl(DAOFactory api) {
-    this.api = api;
+  public UserTaskAPIImpl(DAO dao) {
+    this.dao = dao;
   }
 
   @Override
   public Task getTask(int userId, int taskId) {
     if (userTasksMap.get(userId).containsKey(taskId)) {
-      return api.getTaskDAO().get(taskId);
+      return dao.getTaskDAO().get(taskId);
     }
     return null;
   }
 
   @Override
   public Set<Task> getTasks(int userId) {
-    return api.getTaskDAO().getBatched(userTasksMap.get(userId).keySet());
+    return dao.getTaskDAO().getBatched(userTasksMap.get(userId).keySet());
   }
 
   @Override
   public Set<Task> getTasksWithTags(int userId, Set<Tag> tags) {
-    return api.getTaskDAO().getBatched(userTasksMap.get(userId).entrySet().stream()
+    return dao.getTaskDAO().getBatched(userTasksMap.get(userId).entrySet().stream()
         .filter(integerSetEntry -> integerSetEntry.getValue().containsAll(tags))
         .map(Map.Entry::getKey)
         .collect(Collectors.toSet()));
@@ -42,8 +42,8 @@ public class UserTaskAPIImpl implements UserTaskAPI {
 
   @Override
   public Set<Task> getTasksWithState(int userId, Task.TaskState taskState) {
-    return api.getTaskDAO().getBatched(userTasksMap.get(userId).keySet().stream()
-        .filter(integer -> api.getTaskDAO().get(integer).getState().equals(taskState))
+    return dao.getTaskDAO().getBatched(userTasksMap.get(userId).keySet().stream()
+        .filter(integer -> dao.getTaskDAO().get(integer).getState().equals(taskState))
         .collect(Collectors.toSet()));
   }
 
@@ -69,7 +69,7 @@ public class UserTaskAPIImpl implements UserTaskAPI {
   @Override
   public Task deleteTask(int userId, int taskId) {
     if (userTasksMap.containsKey(userId)) {
-      return userTasksMap.get(userId).remove(taskId) == null ? null : api.getTaskDAO().get(taskId);
+      return userTasksMap.get(userId).remove(taskId) == null ? null : dao.getTaskDAO().get(taskId);
     }
     return null;
   }

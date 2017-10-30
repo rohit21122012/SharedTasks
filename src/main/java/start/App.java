@@ -3,9 +3,8 @@ package start;
 import com.codahale.metrics.health.HealthCheck;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
+import start.access.DAO;
 import start.access.DAOFactory;
-import start.access.DataAcessFactory;
-import start.api.UserTaskAPI;
 import start.api.impl.UserTaskAPIImpl;
 import start.resources.TaskResource;
 import start.resources.UserResource;
@@ -18,11 +17,10 @@ public class App extends Application<Config> {
 
   @Override
   public void run(Config config, Environment environment) throws Exception {
-    DAOFactory daoFactory = DataAcessFactory.getDAOFactory(config.getStoreName());
-    UserTaskAPI userTaskAPI = new UserTaskAPIImpl(daoFactory);
-    environment.jersey().register(new TaskResource(daoFactory));
-    environment.jersey().register(new UserResource(daoFactory));
-    environment.jersey().register(new UserTaskResource(userTaskAPI));
+    DAO dao = DAOFactory.getDAO(config.getStoreName(), environment);
+    environment.jersey().register(new TaskResource(dao.getTaskDAO()));
+    environment.jersey().register(new UserResource(dao.getUserDAO()));
+    environment.jersey().register(new UserTaskResource(new UserTaskAPIImpl(dao)));
     environment.healthChecks().register("statusHealth", new HealthCheck() {
       @Override
       protected Result check() throws Exception {

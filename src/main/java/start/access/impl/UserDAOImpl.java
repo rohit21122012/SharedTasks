@@ -1,15 +1,19 @@
-package start.access.inmemory;
+package start.access.impl;
 
 import start.access.UserDAO;
 import start.model.User;
+import start.store.Store;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-class InMemoryUserDAO implements UserDAO {
-  private final Map<Integer, User> userLookup = new ConcurrentHashMap<>();
-  private AtomicInteger intId = new AtomicInteger(0);
+public class UserDAOImpl implements UserDAO {
+  private final Store<User> userLookup;
+  private AtomicInteger intId;
+
+  public UserDAOImpl(Store<User> userLookup) {
+    this.userLookup = userLookup;
+    this.intId = new AtomicInteger(0);
+  }
 
   @Override
   public User get(int userId) {
