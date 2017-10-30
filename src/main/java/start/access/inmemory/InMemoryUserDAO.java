@@ -12,26 +12,26 @@ class InMemoryUserDAO implements UserDAO {
   private AtomicInteger intId = new AtomicInteger(0);
 
   @Override
-  public User get(int taskId) {
-    return userLookup.get(taskId);
+  public User get(int userId) {
+    return userLookup.get(userId);
   }
 
   @Override
-  public User add(User task) {
+  public User add(User user) {
     int id = intId.getAndIncrement();
-    task.setId(id);
-    userLookup.put(id, task);
+    user.setId(id);
+    userLookup.put(id, user);
     return get(id);
   }
 
   @Override
-  public User update(int taskId, User task) {
-    userLookup.replace(taskId, task);
-    return get(taskId);
+  public User update(int userId, User task) {
+    userLookup.replace(userId, task);
+    return get(userId);
   }
 
   @Override
-  public User delete(int taskId) {
-    return userLookup.remove(taskId);
+  public User delete(int userId) {
+    return userLookup.remove(userId);
   }
 }

@@ -1,10 +1,9 @@
-package start.store;
+package start.access;
 
-import start.access.DAOFactory;
 import start.access.inmemory.InMemoryDAOFactoryImpl;
 import start.access.zk.ZkDAOFactoryImpl;
 
-public class DataStoreFactory {
+public class DataAcessFactory {
   private static DAOFactory zkDAOFactoryImpl = null;
   private static DAOFactory inMemoryFactoryImpl = null;
 
