@@ -22,8 +22,7 @@ public class TaskResource {
   }
 
   @POST
-  public Task addTask(Task task, @QueryParam("createdBy") int userId) {
-
+  public Task addTask(Task task) {
     return this.dao.add(task);
   }
 

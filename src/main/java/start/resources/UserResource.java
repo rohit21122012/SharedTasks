@@ -4,8 +4,10 @@ import start.access.UserDAO;
 import start.model.User;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 @Path("/users")
+@Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 
   private final UserDAO dao;
