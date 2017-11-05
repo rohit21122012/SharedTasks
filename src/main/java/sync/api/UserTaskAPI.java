@@ -1,7 +1,7 @@
-package start.api;
+package sync.api;
 
-import start.model.Tag;
-import start.model.Task;
+import sync.model.Tag;
+import sync.model.Task;
 
 import java.util.Set;
 

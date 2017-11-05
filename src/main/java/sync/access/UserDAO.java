@@ -1,6 +1,6 @@
-package start.access;
+package sync.access;
 
-import start.model.User;
+import sync.model.User;
 
 public interface UserDAO {
   User get(int userId);

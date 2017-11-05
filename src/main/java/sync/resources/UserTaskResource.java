@@ -1,8 +1,8 @@
-package start.resources;
+package sync.resources;
 
-import start.api.UserTaskAPI;
-import start.model.Tag;
-import start.model.Task;
+import sync.api.UserTaskAPI;
+import sync.model.Tag;
+import sync.model.Task;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

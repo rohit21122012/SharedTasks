@@ -1,14 +1,14 @@
-package start;
+package sync;
 
 import com.codahale.metrics.health.HealthCheck;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
-import start.access.DAO;
-import start.access.DAOFactory;
-import start.api.impl.UserTaskAPIImpl;
-import start.resources.TaskResource;
-import start.resources.UserResource;
-import start.resources.UserTaskResource;
+import sync.access.DAO;
+import sync.access.DAOFactory;
+import sync.api.impl.UserTaskAPIImpl;
+import sync.resources.TaskResource;
+import sync.resources.UserResource;
+import sync.resources.UserTaskResource;
 
 public class App extends Application<Config> {
   public static void main(String[] args) throws Exception {
@@ -17,7 +17,7 @@ public class App extends Application<Config> {
 
   @Override
   public void run(Config config, Environment environment) throws Exception {
-    DAO dao = DAOFactory.getDAO(config.getStoreName(), environment);
+    DAO dao = DAOFactory.getDAO(config.getDBConfig(), environment);
     environment.jersey().register(new TaskResource(dao.getTaskDAO()));
     environment.jersey().register(new UserResource(dao.getUserDAO()));
     environment.jersey().register(new UserTaskResource(new UserTaskAPIImpl(dao)));

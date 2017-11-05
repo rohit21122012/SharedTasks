@@ -1,4 +1,4 @@
-package start.model;
+package sync.model;
 
 public enum Tag {
   CREATED,

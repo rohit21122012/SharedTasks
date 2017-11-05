@@ -1,7 +1,7 @@
-package start.resources;
+package sync.resources;
 
-import start.access.UserDAO;
-import start.model.User;
+import sync.access.UserDAO;
+import sync.model.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

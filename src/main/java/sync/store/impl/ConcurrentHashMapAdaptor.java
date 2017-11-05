@@ -1,6 +1,6 @@
-package start.store.impl;
+package sync.store.impl;
 
-import start.store.Store;
+import sync.store.Store;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

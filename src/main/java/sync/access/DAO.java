@@ -1,10 +1,10 @@
-package start.access;
+package sync.access;
 
-import start.access.impl.TaskDAOImpl;
-import start.access.impl.UserDAOImpl;
-import start.model.Task;
-import start.model.User;
-import start.store.Store;
+import sync.access.impl.TaskDAOImpl;
+import sync.access.impl.UserDAOImpl;
+import sync.model.Task;
+import sync.model.User;
+import sync.store.Store;
 
 public class DAO {
   private final TaskDAO taskDAO;

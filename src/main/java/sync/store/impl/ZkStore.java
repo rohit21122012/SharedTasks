@@ -1,8 +1,8 @@
-package start.store.impl;
+package sync.store.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.curator.framework.CuratorFramework;
-import start.store.Store;
+import sync.store.Store;
 
 public class ZkStore<U> implements Store<U> {
   private final CuratorFramework zkClient;

@@ -1,4 +1,4 @@
-package start.store;
+package sync.store;
 
 import io.dropwizard.lifecycle.Managed;
 import org.apache.curator.framework.CuratorFramework;

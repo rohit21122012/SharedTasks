@@ -1,8 +1,8 @@
-package start.access.impl;
+package sync.access.impl;
 
-import start.access.TaskDAO;
-import start.model.Task;
-import start.store.Store;
+import sync.access.TaskDAO;
+import sync.model.Task;
+import sync.store.Store;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;

@@ -1,7 +1,7 @@
-package start.resources;
+package sync.resources;
 
-import start.access.TaskDAO;
-import start.model.Task;
+import sync.access.TaskDAO;
+import sync.model.Task;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

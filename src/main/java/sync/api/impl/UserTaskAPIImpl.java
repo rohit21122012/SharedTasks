@@ -1,9 +1,9 @@
-package start.api.impl;
+package sync.api.impl;
 
-import start.access.DAO;
-import start.api.UserTaskAPI;
-import start.model.Tag;
-import start.model.Task;
+import sync.access.DAO;
+import sync.api.UserTaskAPI;
+import sync.model.Tag;
+import sync.model.Task;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,6 @@
-package start.access;
+package sync.access;
 
-import start.model.Task;
+import sync.model.Task;
 
 import java.util.Set;
 

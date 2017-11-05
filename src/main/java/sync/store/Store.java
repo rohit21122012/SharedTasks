@@ -1,4 +1,4 @@
-package start.store;
+package sync.store;
 
 public interface Store<T> {
   T get(int id);

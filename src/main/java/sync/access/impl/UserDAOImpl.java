@@ -1,8 +1,8 @@
-package start.access.impl;
+package sync.access.impl;
 
-import start.access.UserDAO;
-import start.model.User;
-import start.store.Store;
+import sync.access.UserDAO;
+import sync.model.User;
+import sync.store.Store;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
